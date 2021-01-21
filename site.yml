@@ -1,0 +1,15 @@
+---
+  - name: "Run anagram checker python app in docker container"
+    hosts: localhost
+    connection: local 
+    tasks:
+
+    - name: "build the docker container"
+      shell: "docker build -t don ."
+      register: "output"
+   
+    - name: "run the container, remove after running (--rm), and pass args"
+      shell: "docker run --rm don {{ s1 }} {{ s2 }}"
+      register: "output"
+ 
+    - debug: var=output.stdout_lines
